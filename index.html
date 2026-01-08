@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Preference Consultancy Pvt Ltd</title>
+    <title>First Preference Consultancy - 60/30/10 Design</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -15,516 +15,265 @@
 
     <style>
         :root {
-            --fp-orange: #FE8505;
-            --fp-blue: #1034A6;
-            --fp-linen: #EBF9FF;
+            /* 60% Dominant */
+            --bg-linen: #EBF9FF;
+            /* 30% Secondary */
+            --brand-blue: #1034A6;
+            /* 10% Accent */
+            --brand-orange: #FE8505;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--fp-linen);
+            background-color: var(--bg-linen); /* 60% Application */
+            color: #1e293b;
             overflow-x: hidden;
         }
 
-        /* Glassmorphism Classes */
+        h1, h2, h3, nav {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Glassmorphism - Adjusted for readability against Linen */
         .glass-panel {
-            background: rgba(16, 52, 166, 0.4); /* 40% opacity blue */
+            background: rgba(255, 255, 255, 0.25); /* Lighter base for blending with Linen */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 2px solid var(--fp-orange);
+            border: 1px solid rgba(16, 52, 166, 0.3); /* Blue border (part of the 30%) */
             border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(16, 52, 166, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-panel:hover {
-            border-width: 4px;
-            box-shadow: 0 0 20px rgba(254, 133, 5, 0.4);
-            transform: scale(1.02);
+            border-color: var(--brand-orange); /* Orange interaction (10%) */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(254, 133, 5, 0.15);
         }
 
-        /* Gradient Overlay for Hero */
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(254,133,5,0.8) 0%, rgba(16,52,166,0.8) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
+        /* 10% Accent Elements */
+        .cta-button {
+            background-color: var(--brand-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 133, 5, 0.4);
+        }
+        
+        .cta-button:hover {
+            background-color: #e57600;
+            transform: scale(1.05);
         }
 
-        /* Cursor Follower */
+        .accent-text {
+            color: var(--brand-orange);
+        }
+
+        /* 30% Secondary Elements */
+        .nav-link {
+            color: var(--brand-blue);
+            font-weight: 600;
+        }
+        
+        .section-heading {
+            color: var(--brand-blue);
+        }
+
+        /* Animations */
         .cursor-dot {
-            width: 20px;
-            height: 20px;
-            background: var(--fp-orange);
+            width: 12px;
+            height: 12px;
+            background: var(--brand-orange);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
+            transition: transform 0.1s;
         }
 
-        /* Navigation */
-        nav {
-            background: var(--fp-blue);
-        }
-
-        /* WhatsApp Pulse */
-        .pulse-btn {
-            background: var(--fp-orange);
-            animation: pulse-orange 3s infinite;
-        }
-
-        @keyframes pulse-orange {
-            0% { box-shadow: 0 0 0 0 rgba(254, 133, 5, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(254, 133, 5, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(254, 133, 5, 0); }
-        }
-
-        /* Node Line Animation */
-        .process-line {
-            background-image: linear-gradient(to right, var(--fp-orange) 50%, transparent 50%);
-            background-size: 20px 100%;
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--brand-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease-out;
         }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="selection:bg-[#FE8505] selection:text-white">
 
-    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-dot hidden lg:block"></div>
+    <div class="cursor-outline hidden lg:block"></div>
 
-    <nav class="w-full py-4 px-8 fixed top-0 z-50 flex justify-between items-center shadow-lg">
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl glass-panel px-8 py-4 z-50 flex justify-between items-center bg-white/40">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-[#FE8505] border-2 border-white rounded-lg flex items-center justify-center animate-pulse">
-                <span class="text-white font-bold">FP</span>
+            <div class="w-10 h-10 bg-[#1034A6] rounded-lg flex items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-[#FE8505] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span class="text-white font-bold relative z-10">FP</span>
             </div>
-            <span class="text-white font-bold text-lg hidden md:block">First Preference</span>
+            <span class="text-[#1034A6] font-bold text-lg tracking-tight">First Preference</span>
         </div>
-        <div class="hidden md:flex gap-8 text-white font-medium">
-            <a href="#" class="hover:text-[#FE8505] transition">Home</a>
-            <a href="#" class="hover:text-[#FE8505] transition">Services</a>
-            <a href="#" class="hover:text-[#FE8505] transition">About</a>
-            <a href="#" class="hover:text-[#FE8505] transition">Contact</a>
-            <a href="#" class="hover:text-[#FE8505] transition">Process</a>
+        <div class="hidden md:flex gap-8 text-sm uppercase tracking-wide">
+            <a href="#" class="nav-link hover:text-[#FE8505] transition-colors relative group">
+                Home
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FE8505] transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#" class="nav-link hover:text-[#FE8505] transition-colors relative group">Services</a>
+            <a href="#" class="nav-link hover:text-[#FE8505] transition-colors relative group">About</a>
+            <a href="#" class="nav-link hover:text-[#FE8505] transition-colors relative group">Contact</a>
         </div>
+        <button class="cta-button px-6 py-2 rounded-full font-bold text-sm transition-transform">
+            Get Quote
+        </button>
     </nav>
 
-    <div class="container mx-auto mt-24 px-4 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-        <div class="lg:col-span-8 flex flex-col gap-6">
+    <main class="container mx-auto px-4 pt-32 pb-20 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
             
-            <div class="glass-panel p-12 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-[#FE8505] rounded-full blur-[100px] opacity-20"></div>
-                
-                <h1 id="typing-text" class="text-4xl md:text-6xl font-extrabold text-white mb-8 leading-tight h-24"></h1>
-                
-                <p class="text-white text-lg opacity-90 max-w-lg mb-8">
-                    Elevating business standards through precision auditing and strategic financial guidance.
-                </p>
-                
-                <button class="w-fit bg-[#FE8505] text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#1034A6] transition duration-300">
-                    Get Started
-                </button>
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                <div class="glass-panel p-12 min-h-[450px] flex flex-col justify-center relative bg-white/30">
+                    <h1 class="text-5xl md:text-6xl font-bold text-[#1034A6] mb-6 leading-tight">
+                        Financial Clarity <br>
+                        <span class="text-[#FE8505]">Defined.</span>
+                    </h1>
+                    <p class="text-slate-600 text-lg max-w-xl mb-8 leading-relaxed">
+                        Expert auditing, tax, and advisory services tailored for Zimbabwean growth. We turn complexity into your competitive advantage.
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="cta-button px-8 py-3 rounded-xl font-bold">Explore Services</button>
+                        <button class="px-8 py-3 rounded-xl font-bold text-[#1034A6] border-2 border-[#1034A6] hover:bg-[#1034A6] hover:text-white transition-colors">
+                            View Process
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 group cursor-pointer hover:bg-white/50">
+                        <div class="w-12 h-12 rounded-full bg-[#EBF9FF] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-[#1034A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 3.666V15m1.5-1.5l2.25 2.25M17.25 15l2.25-2.25M3 6v18h18v-2.25m-9-13.5l-2.25 2.25M7.5 12l2.25-2.25m-9 0h.008v.008H7.5V7.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#1034A6] mb-2">Taxation</h3>
+                        <p class="text-sm text-slate-500">ZIMRA compliant strategies.</p>
+                        <div class="w-8 h-1 bg-[#FE8505] mt-4 rounded-full group-hover:w-full transition-all duration-300"></div>
+                    </div>
+
+                    <div class="glass-panel p-6 group cursor-pointer hover:bg-white/50">
+                        <div class="w-12 h-12 rounded-full bg-[#EBF9FF] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-[#1034A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#1034A6] mb-2">Audit</h3>
+                        <p class="text-sm text-slate-500">Transparent assurance.</p>
+                        <div class="w-8 h-1 bg-[#FE8505] mt-4 rounded-full group-hover:w-full transition-all duration-300"></div>
+                    </div>
+
+                    <div class="glass-panel p-6 group cursor-pointer hover:bg-white/50">
+                        <div class="w-12 h-12 rounded-full bg-[#EBF9FF] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-[#1034A6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#1034A6] mb-2">Advisory</h3>
+                        <p class="text-sm text-slate-500">Growth forecasting.</p>
+                        <div class="w-8 h-1 bg-[#FE8505] mt-4 rounded-full group-hover:w-full transition-all duration-300"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-grid">
-                <div class="glass-panel p-6 service-card cursor-pointer">
-                    <h3 class="text-xl font-bold text-white">Accounting Services</h3>
-                    <div class="mt-2 text-[#FE8505] font-mono text-sm">272 Clients</div>
+            <div class="lg:col-span-4 flex flex-col gap-6">
+                <div class="glass-panel p-8 bg-[#1034A6]/90 border-none relative overflow-hidden text-white">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#FE8505] rounded-full blur-[60px] opacity-40"></div>
+                    
+                    <h3 class="text-lg font-light opacity-80 mb-4">Clients Served</h3>
+                    <div class="text-6xl font-bold text-[#FE8505] mb-2 counter" data-target="300">0</div>
+                    <div class="h-px w-full bg-white/20 my-6"></div>
+                    
+                    <h3 class="text-lg font-light opacity-80 mb-4">Years Active</h3>
+                    <div class="text-6xl font-bold text-[#FE8505] counter" data-target="15">0</div>
                 </div>
-                <div class="glass-panel p-6 service-card cursor-pointer">
-                    <h3 class="text-xl font-bold text-white">Secretarial Services</h3>
-                    <div class="mt-2 text-[#FE8505] font-mono text-sm">28 Managed</div>
-                </div>
-                <div class="glass-panel p-6 service-card cursor-pointer">
-                    <h3 class="text-xl font-bold text-white">Auditing & Assurance</h3>
-                    <div class="mt-2 text-[#FE8505] font-mono text-sm">Statutory Compliant</div>
-                </div>
-                <div class="glass-panel p-6 service-card cursor-pointer">
-                    <h3 class="text-xl font-bold text-white">Tax Consultancy</h3>
-                    <div class="mt-2 text-[#FE8505] font-mono text-sm">ZIMRA Experts</div>
-                </div>
-                 <div class="glass-panel p-6 service-card cursor-pointer md:col-span-2">
-                    <h3 class="text-xl font-bold text-white">Business Advisory</h3>
-                    <div class="mt-2 text-[#FE8505] font-mono text-sm">Strategic Growth</div>
+
+                <div class="glass-panel p-8">
+                    <h3 class="text-xl font-bold text-[#1034A6] mb-6">Quick Inquiry</h3>
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Your Name" class="w-full bg-[#EBF9FF] border border-blue-100 rounded-lg p-3 text-[#1034A6] placeholder-blue-300 focus:outline-none focus:border-[#FE8505] transition-colors">
+                        <input type="email" placeholder="Email Address" class="w-full bg-[#EBF9FF] border border-blue-100 rounded-lg p-3 text-[#1034A6] placeholder-blue-300 focus:outline-none focus:border-[#FE8505] transition-colors">
+                        <button class="w-full bg-[#FE8505] hover:bg-[#e57600] text-white font-bold py-3 rounded-lg shadow-lg shadow-orange-200 transition-all flex justify-center items-center gap-2">
+                            Send Request
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="lg:col-span-4 flex flex-col gap-6">
-            
-            <div class="glass-panel p-8 flex flex-col items-center text-center relative overflow-hidden group">
-                <div class="absolute inset-0 bg-[#1034A6] opacity-30 z-0"></div>
-                <div class="relative z-10">
-                    <h2 class="text-2xl font-bold text-white mb-6">Our Impact</h2>
-                    <div class="mb-4">
-                        <span class="text-5xl font-extrabold text-[#FE8505] block counter" data-target="15">0</span>
-                        <span class="text-sm text-white uppercase tracking-widest">Years Experience</span>
-                    </div>
-                    <div>
-                        <span class="text-5xl font-extrabold text-[#FE8505] block counter" data-target="300">0</span>
-                        <span class="text-sm text-white uppercase tracking-widest">Happy Clients</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 relative">
-                <h3 class="text-xl font-bold text-white mb-6">Contact Us</h3>
-                <form class="space-y-4">
-                    <div class="group">
-                        <input type="text" placeholder="Name" class="w-full bg-white/10 border-b-2 border-[#FE8505] p-2 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 transition">
-                    </div>
-                    <div class="group">
-                        <input type="email" placeholder="Email" class="w-full bg-white/10 border-b-2 border-[#FE8505] p-2 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 transition">
-                    </div>
-                    <button type="button" class="pulse-btn w-full py-3 rounded-xl text-white font-bold mt-4 flex items-center justify-center gap-2">
-                        <span>WhatsApp Us</span>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    </button>
-                </form>
+    <footer class="fixed bottom-0 w-full bg-white/80 backdrop-blur-md border-t border-blue-100 py-4 z-40">
+        <div class="container mx-auto px-4 flex justify-between items-center text-xs text-[#1034A6]">
+            <span>© 2026 First Preference Consultancy</span>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-[#FE8505]">Privacy</a>
+                <a href="#" class="hover:text-[#FE8505]">Terms</a>
+                <a href="#" class="hover:text-[#FE8505]">LinkedIn</a>
             </div>
         </div>
-    </div>
-
-    <div class="w-full bg-[#1034A6]/10 backdrop-blur-sm border-t-2 border-[#FE8505] py-10 mt-10 overflow-hidden">
-        <div class="container mx-auto relative">
-            <div class="absolute top-1/2 left-0 w-full h-1 process-line -translate-y-1/2 z-0"></div>
-            
-            <div class="grid grid-cols-4 gap-4 relative z-10">
-                <div class="process-node flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">1</div>
-                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Consult</span>
-                </div>
-                <div class="process-node flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">2</div>
-                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Analyze</span>
-                </div>
-                <div class="process-node flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">3</div>
-                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Implement</span>
-                </div>
-                <div class="process-node flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">4</div>
-                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Review</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Cursor Follower
-        const cursor = document.querySelector('.cursor-dot');
+        // Cursor Logic
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+
         window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: "power2.out"
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+
+            // Outline follows with slight delay
+            outline.animate({
+                left: `${posX - 20}px`,
+                top: `${posY - 20}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover expand effect for cursor
+        document.querySelectorAll('a, button, .glass-panel').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                outline.style.transform = "scale(1.5)";
+                outline.style.borderColor = "#FE8505";
+            });
+            el.addEventListener('mouseleave', () => {
+                outline.style.transform = "scale(1)";
+                outline.style.borderColor = "#1034A6";
             });
         });
 
-        // 2. Typing Animation (Hero)
-        gsap.to("#typing-text", {
-            text: "Trusted Financial Partners in Harare",
-            duration: 2.5,
-            delay: 0.5,
-            ease: "none"
-        });
-
-        // 3. Staggered Service Cards
-        gsap.from(".service-card", {
+        // Animations
+        gsap.from("nav", { y: -100, opacity: 0, duration: 1, ease: "power3.out" });
+        
+        gsap.from(".glass-panel", {
             y: 50,
             opacity: 0,
             duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(1.7)",
-            delay: 1
+            stagger: 0.15,
+            delay: 0.5,
+            ease: "back.out(1.7)"
         });
 
-        // 4. Counter Animation (About Section)
-        ScrollTrigger.batch(".counter", {
-            onEnter: batch => {
-                batch.forEach(el => {
-                    let target = el.getAttribute("data-target");
-                    gsap.to(el, {
-                        innerHTML: target,
-                        duration: 2,
-                        snap: { innerHTML: 1 },
-                        ease: "power1.inOut"
-                    });
-                });
-            }
-        });
-
-        // 5. Process Line Animation
-        gsap.to(".process-line", {
-            backgroundPosition: "200px 0",
-            duration: 2,
-            repeat: -1,
-            ease: "linear"
-        });
-
-        // 6. Process Nodes Pulse
-        gsap.from(".process-node", {
-            scale: 0.8,
-            opacity: 0,
-            duration: 0.5,
-            stagger: 0.2,
-            scrollTrigger: {
-                trigger: ".process-node",
-                start: "top 90%"
-            }
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            gsap.to(counter, {
+                innerHTML: target,
+                duration: 2.5,
+                snap: { innerHTML: 1 },
+                ease: "power2.out",
+                delay: 1
+            });
         });
     </script>
-</body>
-</html>
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 30px;
-        z-index: 10;
-    }
-
-    .logo-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .logo-icon {
-        width: 40px;
-        height: 40px;
-        background: var(--accent-orange);
-        border: 2px solid var(--primary-blue);
-        color: var(--primary-blue);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.2rem;
-        box-shadow: 0 0 10px rgba(254, 133, 5, 0.4);
-    }
-
-    .logo-text h1 { font-size: 1.2rem; font-weight: 700; color: var(--primary-blue); line-height: 1; }
-    .logo-text span { font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-orange); }
-
-    .nav-links a {
-        text-decoration: none;
-        color: var(--primary-blue);
-        margin-left: 20px;
-        font-weight: 600;
-        transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--accent-orange); }
-
-    /* Main Content Area */
-    .main-area {
-        grid-column: 1 / span 2;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    /* Hero Section */
-    .hero-card {
-        padding: 40px;
-        background: linear-gradient(135deg, var(--accent-orange), var(--primary-blue));
-        color: white;
-        border: none;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .hero-card h2 { font-size: 2.5rem; margin-bottom: 10px; }
-    .hero-card p { opacity: 0.9; margin-bottom: 25px; max-width: 60%; }
-    
-    .cta-btn {
-        background: white;
-        color: var(--accent-orange);
-        border: none;
-        padding: 12px 30px;
-        border-radius: 30px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .cta-btn:hover { transform: scale(1.05); color: var(--primary-blue); }
-
-    /* Services Grid */
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 15px;
-    }
-
-    .service-card {
-        padding: 15px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 120px;
-    }
-
-    .service-icon {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-        color: var(--accent-orange);
-    }
-    
-    .service-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; }
-    .follower-count { font-size: 0.7rem; opacity: 0.7; }
-
-    /* Right Sidebar */
-    .sidebar {
-        grid-column: 3;
-        grid-row: 2 / span 2;
-        padding: 25px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .sidebar h3 { font-size: 1.2rem; border-bottom: 2px solid var(--accent-orange); padding-bottom: 10px; margin-bottom: 10px; display: inline-block;}
-
-    input, textarea {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 10px;
-        border: 1px solid rgba(16, 52, 166, 0.2);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.5);
-        color: var(--primary-blue);
-    }
-    
-    input:focus, textarea:focus { outline: 2px solid var(--accent-orange); }
-
-    .whatsapp-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: #25D366;
-        color: white;
-        padding: 12px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        margin-top: auto;
-    }
-
-    /* Bottom Section */
-    .bottom-section {
-        grid-column: 1 / span 2;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .testimonial { font-style: italic; font-size: 0.9rem; border-left: 3px solid var(--accent-orange); padding-left: 15px; }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 900px) {
-        .container {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            height: auto;
-        }
-        .nav-panel, .main-area, .sidebar, .bottom-section {
-            grid-column: 1;
-        }
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-</style>
-</head>
-<body>
-
-<div class="container">
-    <div class="glass-panel nav-panel">
-        <div class="logo-container">
-            <div class="logo-icon">FP</div>
-            <div class="logo-text">
-                <h1>First Preference</h1>
-                <span>Consultancy Pvt Ltd</span>
-            </div>
-        </div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-        </div>
-    </div>
-
-    <div class="main-area">
-        <div class="glass-panel hero-card">
-            <h2>Empowering Harare Businesses</h2>
-            <p>Expert financial guidance tailored for the Zimbabwean market. We ensure your compliance and growth.</p>
-            <button class="cta-btn">Get Started</button>
-        </div>
-
-        <div class="services-grid">
-            <div class="glass-panel service-card">
-                <div class="service-icon">📂</div>
-                <div class="service-title">Secretarial</div>
-                <div class="follower-count">28 Followers</div>
-            </div>
-            <div class="glass-panel service-card">
-                <div class="service-icon">📊</div>
-                <div class="service-title">Accounting</div>
-                <div class="follower-count">272 Followers</div>
-            </div>
-            <div class="glass-panel service-card">
-                <div class="service-icon">🛡️</div>
-                <div class="service-title">Auditing & Assurance</div>
-            </div>
-            <div class="glass-panel service-card">
-                <div class="service-icon">💰</div>
-                <div class="service-title">Tax Services</div>
-            </div>
-            <div class="glass-panel service-card">
-                <div class="service-icon">🚀</div>
-                <div class="service-title">Business Advisory</div>
-            </div>
-        </div>
-        
-        <div class="glass-panel bottom-section">
-            <div class="testimonial">
-                "First Preference transformed our tax compliance strategy." <br>
-                <span style="font-size:0.8rem; font-weight:bold">- Harare Retail Group</span>
-            </div>
-            <div style="font-size: 0.8rem; text-align: right;">
-                <a href="#" style="color: var(--primary-blue);">Privacy Policy</a> | 
-                <a href="#" style="color: var(--primary-blue);">Terms</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="glass-panel sidebar">
-        <h3>Quick Contact</h3>
-        <form>
-            <label style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; display:block;">Name</label>
-            <input type="text" placeholder="John Doe">
-            
-            <label style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; display:block;">Email</label>
-            <input type="email" placeholder="email@domain.com">
-            
-            <label style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; display:block;">Message</label>
-            <textarea rows="4" placeholder="How can we help?"></textarea>
-            
-            <button class="cta-btn" style="width:100%; background: var(--accent-orange); color: white;">Send Request</button>
-        </form>
-
-        <a href="#" class="whatsapp-btn">
-            <span style="font-size: 1.2rem;">📱</span> Chat on WhatsApp
-        </a>
-    </div>
-
-</div>
-
 </body>
 </html>
