@@ -1,66 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First Preference Consultancy Pvt Ltd</title>
-<style>
-    :root {
-        --bg-linen: #EBF9FF;
-        --primary-blue: #1034A6;
-        --accent-orange: #FE8505;
-        --glass-bg: rgba(255, 255, 255, 0.65);
-        --glass-border: rgba(255, 255, 255, 0.4);
-        --shadow: 0 8px 32px 0 rgba(16, 52, 166, 0.1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Preference Consultancy Pvt Ltd</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    <style>
+        :root {
+            --fp-orange: #FE8505;
+            --fp-blue: #1034A6;
+            --fp-linen: #EBF9FF;
+        }
 
-    body {
-        background-color: var(--bg-linen);
-        /* Subtle abstract shapes for glass effect depth */
-        background-image: 
-            radial-gradient(circle at 10% 20%, rgba(254, 133, 5, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at 90% 80%, rgba(16, 52, 166, 0.15) 0%, transparent 40%);
-        color: var(--primary-blue);
-        padding: 20px;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--fp-linen);
+            overflow-x: hidden;
+        }
 
-    /* Glassmorphism Base Class */
-    .glass-panel {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        transition: all 0.3s ease;
-    }
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(16, 52, 166, 0.4); /* 40% opacity blue */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--fp-orange);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            transition: all 0.3s ease;
+        }
 
-    .glass-panel:hover {
-        box-shadow: 0 8px 32px 0 rgba(254, 133, 5, 0.25); /* Orange glow on hover */
-        border-color: rgba(254, 133, 5, 0.3);
-    }
+        .glass-panel:hover {
+            border-width: 4px;
+            box-shadow: 0 0 20px rgba(254, 133, 5, 0.4);
+            transform: scale(1.02);
+        }
 
-    /* Layout Grid */
-    .container {
-        display: grid;
-        grid-template-columns: 250px 1fr 300px; /* Nav | Hero | Sidebar */
-        grid-template-rows: auto auto 1fr;
-        gap: 20px;
-        max-width: 1400px;
-        width: 100%;
-        height: 90vh; /* 16:9 feel */
-    }
+        /* Gradient Overlay for Hero */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(254,133,5,0.8) 0%, rgba(16,52,166,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+        }
 
-    /* Navigation Panel (Top Left) */
-    .nav-panel {
-        grid-column: 1 / span 3;
-        display: flex;
+        /* Cursor Follower */
+        .cursor-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--fp-orange);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--fp-blue);
+        }
+
+        /* WhatsApp Pulse */
+        .pulse-btn {
+            background: var(--fp-orange);
+            animation: pulse-orange 3s infinite;
+        }
+
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(254, 133, 5, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(254, 133, 5, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(254, 133, 5, 0); }
+        }
+
+        /* Node Line Animation */
+        .process-line {
+            background-image: linear-gradient(to right, var(--fp-orange) 50%, transparent 50%);
+            background-size: 20px 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="cursor-dot hidden md:block"></div>
+
+    <nav class="w-full py-4 px-8 fixed top-0 z-50 flex justify-between items-center shadow-lg">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-[#FE8505] border-2 border-white rounded-lg flex items-center justify-center animate-pulse">
+                <span class="text-white font-bold">FP</span>
+            </div>
+            <span class="text-white font-bold text-lg hidden md:block">First Preference</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-white font-medium">
+            <a href="#" class="hover:text-[#FE8505] transition">Home</a>
+            <a href="#" class="hover:text-[#FE8505] transition">Services</a>
+            <a href="#" class="hover:text-[#FE8505] transition">About</a>
+            <a href="#" class="hover:text-[#FE8505] transition">Contact</a>
+            <a href="#" class="hover:text-[#FE8505] transition">Process</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-24 px-4 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <div class="lg:col-span-8 flex flex-col gap-6">
+            
+            <div class="glass-panel p-12 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#FE8505] rounded-full blur-[100px] opacity-20"></div>
+                
+                <h1 id="typing-text" class="text-4xl md:text-6xl font-extrabold text-white mb-8 leading-tight h-24"></h1>
+                
+                <p class="text-white text-lg opacity-90 max-w-lg mb-8">
+                    Elevating business standards through precision auditing and strategic financial guidance.
+                </p>
+                
+                <button class="w-fit bg-[#FE8505] text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#1034A6] transition duration-300">
+                    Get Started
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-grid">
+                <div class="glass-panel p-6 service-card cursor-pointer">
+                    <h3 class="text-xl font-bold text-white">Accounting Services</h3>
+                    <div class="mt-2 text-[#FE8505] font-mono text-sm">272 Clients</div>
+                </div>
+                <div class="glass-panel p-6 service-card cursor-pointer">
+                    <h3 class="text-xl font-bold text-white">Secretarial Services</h3>
+                    <div class="mt-2 text-[#FE8505] font-mono text-sm">28 Managed</div>
+                </div>
+                <div class="glass-panel p-6 service-card cursor-pointer">
+                    <h3 class="text-xl font-bold text-white">Auditing & Assurance</h3>
+                    <div class="mt-2 text-[#FE8505] font-mono text-sm">Statutory Compliant</div>
+                </div>
+                <div class="glass-panel p-6 service-card cursor-pointer">
+                    <h3 class="text-xl font-bold text-white">Tax Consultancy</h3>
+                    <div class="mt-2 text-[#FE8505] font-mono text-sm">ZIMRA Experts</div>
+                </div>
+                 <div class="glass-panel p-6 service-card cursor-pointer md:col-span-2">
+                    <h3 class="text-xl font-bold text-white">Business Advisory</h3>
+                    <div class="mt-2 text-[#FE8505] font-mono text-sm">Strategic Growth</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            
+            <div class="glass-panel p-8 flex flex-col items-center text-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-[#1034A6] opacity-30 z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold text-white mb-6">Our Impact</h2>
+                    <div class="mb-4">
+                        <span class="text-5xl font-extrabold text-[#FE8505] block counter" data-target="15">0</span>
+                        <span class="text-sm text-white uppercase tracking-widest">Years Experience</span>
+                    </div>
+                    <div>
+                        <span class="text-5xl font-extrabold text-[#FE8505] block counter" data-target="300">0</span>
+                        <span class="text-sm text-white uppercase tracking-widest">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 relative">
+                <h3 class="text-xl font-bold text-white mb-6">Contact Us</h3>
+                <form class="space-y-4">
+                    <div class="group">
+                        <input type="text" placeholder="Name" class="w-full bg-white/10 border-b-2 border-[#FE8505] p-2 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 transition">
+                    </div>
+                    <div class="group">
+                        <input type="email" placeholder="Email" class="w-full bg-white/10 border-b-2 border-[#FE8505] p-2 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 transition">
+                    </div>
+                    <button type="button" class="pulse-btn w-full py-3 rounded-xl text-white font-bold mt-4 flex items-center justify-center gap-2">
+                        <span>WhatsApp Us</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full bg-[#1034A6]/10 backdrop-blur-sm border-t-2 border-[#FE8505] py-10 mt-10 overflow-hidden">
+        <div class="container mx-auto relative">
+            <div class="absolute top-1/2 left-0 w-full h-1 process-line -translate-y-1/2 z-0"></div>
+            
+            <div class="grid grid-cols-4 gap-4 relative z-10">
+                <div class="process-node flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">1</div>
+                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Consult</span>
+                </div>
+                <div class="process-node flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">2</div>
+                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Analyze</span>
+                </div>
+                <div class="process-node flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">3</div>
+                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Implement</span>
+                </div>
+                <div class="process-node flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-[#1034A6] border-2 border-[#FE8505] flex items-center justify-center text-white font-bold mb-2 shadow-lg">4</div>
+                    <span class="text-[#1034A6] font-bold bg-[#EBF9FF] px-2 rounded">Review</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        // 1. Cursor Follower
+        const cursor = document.querySelector('.cursor-dot');
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.1,
+                ease: "power2.out"
+            });
+        });
+
+        // 2. Typing Animation (Hero)
+        gsap.to("#typing-text", {
+            text: "Trusted Financial Partners in Harare",
+            duration: 2.5,
+            delay: 0.5,
+            ease: "none"
+        });
+
+        // 3. Staggered Service Cards
+        gsap.from(".service-card", {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            delay: 1
+        });
+
+        // 4. Counter Animation (About Section)
+        ScrollTrigger.batch(".counter", {
+            onEnter: batch => {
+                batch.forEach(el => {
+                    let target = el.getAttribute("data-target");
+                    gsap.to(el, {
+                        innerHTML: target,
+                        duration: 2,
+                        snap: { innerHTML: 1 },
+                        ease: "power1.inOut"
+                    });
+                });
+            }
+        });
+
+        // 5. Process Line Animation
+        gsap.to(".process-line", {
+            backgroundPosition: "200px 0",
+            duration: 2,
+            repeat: -1,
+            ease: "linear"
+        });
+
+        // 6. Process Nodes Pulse
+        gsap.from(".process-node", {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".process-node",
+                start: "top 90%"
+            }
+        });
+    </script>
+</body>
+</html>
         justify-content: space-between;
         align-items: center;
         padding: 15px 30px;
